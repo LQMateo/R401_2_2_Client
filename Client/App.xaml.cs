@@ -1,6 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
+using Client.ViewModels;
+using Client.Views;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -36,8 +40,20 @@ namespace Client
         public App()
         {
             this.InitializeComponent();
+            Ioc.Default.ConfigureServices(
+                new ServiceCollection()
+                .AddSingleton<AddSerieViewModel>()
+                .BuildServiceProvider()
+            );
         }
 
+
+        public AddSerieViewModel AddSerieVM
+        {
+            get { return Ioc.Default.GetService<AddSerieViewModel>(); }
+        }
+
+        public static FrameworkElement MainRoot { get; private set; }
         /// <summary>
         /// Invoked when the application is launched.
         /// </summary>
@@ -45,7 +61,11 @@ namespace Client
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             m_window = new MainWindow();
+            Frame rootFrame = new Frame();
+            this.m_window.Content = rootFrame;
             m_window.Activate();
+            rootFrame.Navigate(typeof(AddSeriePage));
+            MainRoot = m_window.Content as FrameworkElement;
         }
 
         private Window m_window;
