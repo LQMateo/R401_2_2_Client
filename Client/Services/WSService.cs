@@ -59,7 +59,7 @@ namespace Client.Services
             {
                 var json = JsonSerializer.Serialize(objet);
                 var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-                using var response4 = await httpClient.PostAsync("https://localhost:7022/api/" + nomControleur, stringContent);
+                using var response4 = await httpClient.PostAsync(nomControleur, stringContent);
                 return response4.EnsureSuccessStatusCode();
             }
             catch(Exception)

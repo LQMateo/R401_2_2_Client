@@ -42,7 +42,7 @@ namespace Client
             this.InitializeComponent();
             Ioc.Default.ConfigureServices(
                 new ServiceCollection()
-                .AddSingleton<AddSerieViewModel>()
+                .AddSingleton<UpdateSerieViewModel>()
                 .BuildServiceProvider()
             );
         }
@@ -51,6 +51,10 @@ namespace Client
         public AddSerieViewModel AddSerieVM
         {
             get { return Ioc.Default.GetService<AddSerieViewModel>(); }
+        }
+        public UpdateSerieViewModel UpdateSerieVM
+        {
+            get { return Ioc.Default.GetService<UpdateSerieViewModel>(); }
         }
 
         public static FrameworkElement MainRoot { get; private set; }
@@ -64,7 +68,7 @@ namespace Client
             Frame rootFrame = new Frame();
             this.m_window.Content = rootFrame;
             m_window.Activate();
-            rootFrame.Navigate(typeof(AddSeriePage));
+            rootFrame.Navigate(typeof(UpdateSeriePage));
             MainRoot = m_window.Content as FrameworkElement;
         }
 

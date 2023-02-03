@@ -19,7 +19,7 @@ namespace Client.ViewModels
         {
             if (Serie.formatIsGood(Serie))
             {
-                WSService<Serie> ws = new WSService<Serie>("");
+                WSService<Serie> ws = new WSService<Serie>("Series");
                 var result = await ws.PostAsync("Series", Serie);
                 Serie tempon = Serie;
                 Serie = new Serie();
