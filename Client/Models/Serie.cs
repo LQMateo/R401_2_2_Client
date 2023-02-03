@@ -13,14 +13,14 @@ namespace Client.Models
         public int Serieid { get; set; }
         public string Titre { get; set; } = null!;
         public string? Resume { get; set; }
-        public int? Nbsaisons { get; set; }
-        public int? Nbepisodes { get; set; }
-        public int? Anneecreation { get; set; }
+        public int Nbsaisons { get; set; }
+        public int Nbepisodes { get; set; }
+        public int Anneecreation { get; set; }
         public string? Network { get; set; }
 
         public Serie() { }
 
-        public Serie(string titre, string resume, int? nbsaisons, int? nbepisodes, int? anneecreation, string network)
+        public Serie(string titre, string resume, int nbsaisons, int nbepisodes, int anneecreation, string network)
         {
             Titre = titre;
             Resume = resume;
@@ -45,6 +45,11 @@ namespace Client.Models
         public override int GetHashCode()
         {
             return HashCode.Combine(Serieid, Titre, Resume, Nbsaisons, Nbepisodes, Anneecreation, Network);
+        }
+
+        static public bool formatIsGood(Serie serie)
+        {
+            return (serie.Titre != null && serie.Resume != null && serie.Titre != "" && serie.Resume != "" && serie.Nbsaisons > 0 && serie.Nbepisodes >= 0 && serie.Network != null);
         }
     }
 }

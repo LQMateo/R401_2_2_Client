@@ -1,10 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml.Controls;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Client.ViewModels
 {
@@ -14,11 +10,12 @@ namespace Client.ViewModels
         /// Affiche un message d'erreur
         /// </summary>
         /// <param name="message">Le message à afficher</param>
-        private async void ShowAsync(String message)
+        /// <param name="messageWindow">Le message de la fenêtre</param>
+        protected async void ShowAsync(String message, String messageWindow = "Erreur")
         {
             ContentDialog contentDialog = new ContentDialog
             {
-                Title = "Erreur",
+                Title = messageWindow,
                 Content = message,
                 CloseButtonText = "Ok"
             };

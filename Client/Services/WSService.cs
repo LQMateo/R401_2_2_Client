@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Windows.Web.Http;
 
 namespace Client.Services
 {
@@ -15,7 +18,7 @@ namespace Client.Services
     public class WSService<T> : IWSService<T>
     {
         System.Net.Http.HttpClient client;
-
+        System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();        
         private static int PORT = 7022;
 
         /// <summary>
@@ -23,7 +26,7 @@ namespace Client.Services
         /// </summary>
         /// <param name="nomControleur">Le nom du contrôleur à interroger.</param>
         /// <returns>Retourne une liste des données de type T, ou null en cas d'erreur.</returns>
-        public async Task<List<T>> GetDevisesAsync(string nomControleur)
+        public async Task<List<T>> GetAsync(string nomControleur)
         {
             try
             {
@@ -50,9 +53,20 @@ namespace Client.Services
         /// </summary>
         /// <param name="nomControleur">Le nom du contrôleur à interroger.</param>
         /// <returns>Retourne une liste vide des données de type T.</returns>
-        public async Task<List<T>> PostAsync(string nomControleur)
+        public async Task<System.Net.Http.HttpResponseMessage> PostAsync(string nomControleur, T objet)
         {
-            return null;
+            try
+            {
+                var json = JsonSerializer.Serialize(objet);
+                var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+                using var response4 = await httpClient.PostAsync("https://localhost:7022/api/" + nomControleur, stringContent);
+                return response4.EnsureSuccessStatusCode();
+            }
+            catch(Exception)
+            {
+                return null;
+            }
+            
         }
 
         /// <summary>

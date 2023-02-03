@@ -1,10 +1,6 @@
 ﻿using Client.Models;
+using Client.Services;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Client.ViewModels
 {
@@ -12,22 +8,40 @@ namespace Client.ViewModels
     {
         private Serie serie;
 
-        public Serie Serie { get => serie; set => serie = value; }
+        public Serie Serie { get => serie; set { serie = value; OnPropertyChanged(); } }
 
         public IRelayCommand BtnAdd { get; }
 
         /// <summary>
         /// Action pour ajouter une série
         /// </summary>
-        public void ActionAddSerie()
+        public async void ActionAddSerie()
         {
+            if (Serie.formatIsGood(Serie))
+            {
+                WSService<Serie> ws = new WSService<Serie>("");
+                var result = await ws.PostAsync("Series", Serie);
+                Serie tempon = Serie;
+                Serie = new Serie();
+
+                if (((double)result.StatusCode) == 201)
+                    ShowAsync("Série ajouté avec succès", "Succes");
+                else
+                {
+                    Serie = tempon;
+                    ShowAsync("Problème dans l'ajout");
+                }
+            }
+            else
+            {
+                ShowAsync("Un ou plusieurs champs ne sont pas correct");
+            }
             
         }
 
         public AddSerieViewModel()
         {
-            Serie= new Serie();
-            Serie.Titre = "Juste tets";
+            Serie = new Serie();
             BtnAdd = new RelayCommand(ActionAddSerie);
         }
     }
