@@ -7,6 +7,7 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Windows.Web.Http;
 
 namespace Client.Services
@@ -43,9 +44,20 @@ namespace Client.Services
         /// </summary>
         /// <param name="nomControleur">Le nom du contrôleur à interroger.</param>
         /// <returns>Retourne une liste vide des données de type T.</returns>
-        public async Task<List<T>> PutAsync(string nomControleur)
+        public async Task<System.Net.Http.HttpResponseMessage> PutAsync(string nomControleur, T objet)
         {
-            return null;
+            try
+            {
+                var json = JsonSerializer.Serialize(objet);
+                var stringContent = new StringContent(json, Encoding.UTF8, "application/json");            
+                using var response4 = await httpClient.PutAsync(nomControleur, stringContent);
+                Console.WriteLine(response4);
+                return response4.EnsureSuccessStatusCode();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -59,7 +71,7 @@ namespace Client.Services
             {
                 var json = JsonSerializer.Serialize(objet);
                 var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-                using var response4 = await httpClient.PostAsync(nomControleur, stringContent);
+                using var response4 = await httpClient.PostAsync(nomControleur, stringContent);                
                 return response4.EnsureSuccessStatusCode();
             }
             catch(Exception)

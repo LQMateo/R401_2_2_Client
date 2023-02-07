@@ -25,25 +25,24 @@ namespace Client.ViewModels
         /// </summary>
         public async void ActionUpdateSerie()
         {
-            //if (Serie.formatIsGood(Serie))
-            //{
-            //    WSService<Serie> ws = new WSService<Serie>("");
-            //    var result = await ws.PutAsync("Series", Serie);
-            //    Serie tempon = Serie;
-            //    Serie = new Serie();
+            if (Serie.formatIsGood(Serie))
+            {
+                WSService<Serie> ws = new WSService<Serie>("");
+                var result = await ws.PutAsync("Series/"+Serie.Serieid, Serie);
+                Serie tempon = Serie;
+                Serie = new Serie();
 
-            //    if (((double)result.StatusCode) == 201)
-            //        ShowAsync("Série ajouté avec succès", "Succes");
-            //    else
-            //    {
-            //        Serie = tempon;
-            //        ShowAsync("Problème dans l'ajout");
-            //    }
-            //}
-            //else
-            //{
-            //    ShowAsync("Un ou plusieurs champs ne sont pas correct");
-            //}
+                if ( result != null && ((double)result.StatusCode) == 201)
+                    ShowAsync("Série modifié avec succès", "Succes");
+                else { 
+                    Serie = tempon;
+                    ShowAsync("Problème dans l'ajout");
+                }
+            }
+            else
+            { 
+                ShowAsync("Un ou plusieurs champs ne sont pas correct");
+            }
 
         }
 
@@ -58,7 +57,6 @@ namespace Client.ViewModels
         {
             WSService<Serie> ws = new WSService<Serie>("");
             List<Serie> result = await ws.GetAsync("Series");
-
             if (Series != null)
                 Series = new ObservableCollection<Serie>(result);
             else

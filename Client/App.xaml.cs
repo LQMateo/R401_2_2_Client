@@ -58,15 +58,13 @@ namespace Client
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            /*m_window = new MainWindow();
-            Frame rootFrame = new Frame();
-            this.m_window.Content = rootFrame;
-            m_window.Activate();
-            rootFrame.Navigate(typeof(MainWindow));
-            MainRoot = m_window.Content as FrameworkElement;*/
-
             m_window = new MainWindow();
+            Frame rootFrame = new Frame();
+            //this.m_window.Content = rootFrame;
             m_window.Activate();
+            /*rootFrame.Navigate(typeof(MainWindow));*/
+            MainRoot = m_window.Content as FrameworkElement;
+
         }
 
         private Window m_window;

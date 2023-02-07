@@ -9,6 +9,6 @@ namespace Client.Services
         Task<List<T>> GetAsync(string nomControleur);
         Task<List<T>> GetSerieAsync(string nomControleur);
         Task<System.Net.Http.HttpResponseMessage> PostAsync(string nomControleur, T objet);
-        Task<List<T>> PutAsync(string nomControleur);
+        Task<System.Net.Http.HttpResponseMessage> PutAsync(string nomControleur, T objet);
     }
 }
