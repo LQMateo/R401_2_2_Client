@@ -1,16 +1,42 @@
-<!-- Copyright (c) Microsoft Corporation and Contributors. -->
-<!-- Licensed under the MIT License. -->
+<!--  Copyright (c) Microsoft Corporation and Contributors.  -->
+<!--  Licensed under the MIT License.  -->
 
 <Window
     x:Class="Client.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Client"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Client"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
+    <StackPanel
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Orientation="Horizontal">
+        <NavigationView
+            x:Name="NavigationView"
+            IsBackButtonVisible="Collapsed"
+            IsSettingsVisible="False"
+            Loaded="NavigationView_Loaded"
+            PaneDisplayMode="Top"
+            SelectionChanged="NavigationView_SelectionChanged">
+            <NavigationView.MenuItems>
+                <NavigationViewItem
+                    Content="Ajouter"
+                    Tag="Client.Views.AddSeriePage"
+                    ToolTipService.ToolTip="Ajouter" />
+                <NavigationViewItem
+                    Content="Modifier"
+                    Tag="Client.Views.UpdateSeriePage"
+                    ToolTipService.ToolTip="Modifier" />
+                <NavigationViewItem
+                    Content="Supprimer"
+                    Tag="Client.Views.DeleteSeriePage"
+                    ToolTipService.ToolTip="Supprimer" />
+                <!--  More items  -->
+            </NavigationView.MenuItems>
+            <Frame x:Name="ContentFrame" />
+        </NavigationView>
     </StackPanel>
 </Window>

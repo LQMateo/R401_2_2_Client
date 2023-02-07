@@ -96,7 +96,8 @@ namespace Client.Services
         public WSService(String nameUri)
         {
             client = new System.Net.Http.HttpClient();
-            client.BaseAddress = new Uri("https://localhost:" + PORT + "/api/" + nameUri);
+            //client.BaseAddress = new Uri("https://localhost:" + PORT + "/api/" + nameUri);
+            client.BaseAddress = new Uri("https://r40122.azurewebsites.net/api/" + nameUri);
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));

@@ -18,7 +18,7 @@
             Margin="10"
             FontFamily="Arial"
             RelativePanel.AlignHorizontalCenterWithPanel="True"
-            Text="Nom série" />
+            Text="Nom sï¿½rie" />
         <TextBox
             x:Name="nameSerieInput"
             Width="150"
@@ -33,7 +33,7 @@
             Margin="10"
             RelativePanel.AlignHorizontalCenterWithPanel="True"
             RelativePanel.Below="nameSerieInput"
-            Text="Résumé série" />
+            Text="Rï¿½sumï¿½ sï¿½rie" />
         <TextBox
             x:Name="resumeSerieInput"
             Width="150"
@@ -49,7 +49,7 @@
             RelativePanel.AlignHorizontalCenterWithPanel="True"
             RelativePanel.Below="resumeSerieInput"
             Text="Nombre de saisons" />
-        <TextBox
+        <NumberBox
             x:Name="numberSeasonsInput"
             Width="150"
             Margin="10"
@@ -62,8 +62,8 @@
             Margin="10"
             RelativePanel.AlignHorizontalCenterWithPanel="True"
             RelativePanel.Below="numberSeasonsInput"
-            Text="Nombre d'épisodes" />
-        <TextBox
+            Text="Nombre d'ï¿½pisodes" />
+        <NumberBox
             x:Name="numberEpisodeInput"
             Width="150"
             Margin="10"
@@ -76,8 +76,8 @@
             Margin="10"
             RelativePanel.AlignHorizontalCenterWithPanel="True"
             RelativePanel.Below="numberEpisodeInput"
-            Text="Année de sortie" />
-        <TextBox
+            Text="Annï¿½e de sortie" />
+        <NumberBox
             x:Name="numberAnneecreationInput"
             Width="150"
             Margin="10"
@@ -90,8 +90,8 @@
             Margin="10"
             RelativePanel.AlignHorizontalCenterWithPanel="True"
             RelativePanel.Below="numberAnneecreationInput"
-            Text="Réseau" />
-        <TextBox
+            Text="Rï¿½seau" />
+        <NumberBox
             x:Name="numberNetworkInput"
             Width="150"
             Margin="10"
