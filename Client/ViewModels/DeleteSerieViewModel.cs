@@ -28,13 +28,14 @@ namespace Client.ViewModels
             var result = await ws.DeleteAsync("Series/" + Serie.Serieid);
 
             if (result != null && ((double)result.StatusCode) == 204)
+            {
                 ShowAsync("Série supprimé avec succès", "Succes");
+                GetDataOnLoadAsync();
+            }
             else
             {
                 ShowAsync("Problème dans la suppression");
             }
-
-
         }
 
         public DeleteSerieViewModel()

@@ -29,8 +29,8 @@ namespace Client
             Ioc.Default.ConfigureServices(
                 new ServiceCollection()
                 .AddSingleton<AddSerieViewModel>()
-                .AddSingleton<UpdateSerieViewModel>()
-                .AddSingleton<DeleteSerieViewModel>()
+                .AddTransient<UpdateSerieViewModel>()
+                .AddTransient<DeleteSerieViewModel>()
                 .BuildServiceProvider()
             );
         }
@@ -48,8 +48,6 @@ namespace Client
         {
             get { return Ioc.Default.GetService<DeleteSerieViewModel>(); }
         }
-
-
         
 
         public static FrameworkElement MainRoot { get; private set; }
