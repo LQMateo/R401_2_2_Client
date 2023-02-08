@@ -33,8 +33,6 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-
-
         <TextBlock
             x:Name="nameSerieLabel"
             Margin="10"

@@ -27,16 +27,16 @@ namespace Client.ViewModels
         {
             if (Serie.formatIsGood(Serie))
             {
-                WSService<Serie> ws = new WSService<Serie>("");
+                WSService<Serie> ws = new WSService<Serie>();
                 var result = await ws.PutAsync("Series/"+Serie.Serieid, Serie);
                 Serie tempon = Serie;
                 Serie = new Serie();
 
-                if ( result != null && ((double)result.StatusCode) == 201)
+                if ( result != null && ((double)result.StatusCode) == 204)
                     ShowAsync("Série modifié avec succès", "Succes");
-                else { 
+                else {
                     Serie = tempon;
-                    ShowAsync("Problème dans l'ajout");
+                    ShowAsync("Problème dans la modification");
                 }
             }
             else
@@ -55,10 +55,11 @@ namespace Client.ViewModels
 
         private async void GetDataOnLoadAsync()
         {
-            WSService<Serie> ws = new WSService<Serie>("");
+            WSService<Serie> ws = new WSService<Serie>();
             List<Serie> result = await ws.GetAsync("Series");
-            if (Series != null)
-                Series = new ObservableCollection<Serie>(result);
+
+            if (Series != null)            
+                Series = new ObservableCollection<Serie>(result);            
             else
                 ShowAsync("L'API ne fonctionne pas.");
         }

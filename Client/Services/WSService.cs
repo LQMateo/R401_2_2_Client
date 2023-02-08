@@ -19,8 +19,7 @@ namespace Client.Services
     public class WSService<T> : IWSService<T>
     {
         System.Net.Http.HttpClient client;
-        System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();        
-        private static int PORT = 7022;
+        System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();   
 
         /// <summary>
         /// Récupère les données de l'API à l'aide d'une requête GET.
@@ -29,8 +28,8 @@ namespace Client.Services
         /// <returns>Retourne une liste des données de type T, ou null en cas d'erreur.</returns>
         public async Task<List<T>> GetAsync(string nomControleur)
         {
-            try
-            {
+           try
+           {
                 return await client.GetFromJsonAsync<List<T>>(nomControleur);
             }
             catch (Exception)
@@ -50,7 +49,7 @@ namespace Client.Services
             {
                 var json = JsonSerializer.Serialize(objet);
                 var stringContent = new StringContent(json, Encoding.UTF8, "application/json");            
-                using var response4 = await httpClient.PutAsync(nomControleur, stringContent);
+                using var response4 = await httpClient.PutAsync(client.BaseAddress + "/" + nomControleur, stringContent);
                 Console.WriteLine(response4);
                 return response4.EnsureSuccessStatusCode();
             }
@@ -71,10 +70,10 @@ namespace Client.Services
             {
                 var json = JsonSerializer.Serialize(objet);
                 var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-                using var response4 = await httpClient.PostAsync(nomControleur, stringContent);                
+                using var response4 = await httpClient.PostAsync(client.BaseAddress + "/" + nomControleur, stringContent);
                 return response4.EnsureSuccessStatusCode();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return null;
             }
@@ -86,9 +85,17 @@ namespace Client.Services
         /// </summary>
         /// <param name="nomControleur">Le nom du contrôleur à interroger.</param>
         /// <returns>Retourne une liste vide des données de type T.</returns>
-        public async Task<List<T>> DeleteAsync(string nomControleur)
+        public async Task<System.Net.Http.HttpResponseMessage> DeleteAsync(string nomControleur)
         {
-            return null;
+            try
+            {
+                using var response4 = await httpClient.DeleteAsync(client.BaseAddress + "/" + nomControleur);
+                return response4.EnsureSuccessStatusCode();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -105,11 +112,11 @@ namespace Client.Services
         /// Construct a webService
         /// </summary>        
         /// <param name="nameURI">Name of URI for this service</param>
-        public WSService(String nameUri)
+        public WSService()
         {
             client = new System.Net.Http.HttpClient();
             //client.BaseAddress = new Uri("https://localhost:" + PORT + "/api/" + nameUri);
-            client.BaseAddress = new Uri("https://r40122.azurewebsites.net/api/" + nameUri);
+            client.BaseAddress = new Uri("https://r40122.azurewebsites.net/api/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));

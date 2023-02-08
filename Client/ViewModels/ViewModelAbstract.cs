@@ -13,14 +13,15 @@ namespace Client.ViewModels
         /// <param name="messageWindow">Le message de la fenêtre</param>
         protected async void ShowAsync(String message, String messageWindow = "Erreur")
         {
-            ContentDialog contentDialog = new ContentDialog
-            {
-                Title = messageWindow,
-                Content = message,
-                CloseButtonText = "Ok"
-            };
-            contentDialog.XamlRoot = App.MainRoot.XamlRoot;
-            ContentDialogResult result = await contentDialog.ShowAsync();
+            /* ContentDialog contentDialog = new ContentDialog
+             {
+                 Title = messageWindow,
+                 Content = message,
+                 CloseButtonText = "Ok"
+             };
+             contentDialog.XamlRoot = App.MainRoot.XamlRoot;
+             ContentDialogResult result = await contentDialog.ShowAsync();*/
+            Console.WriteLine(message);
         }
     }
 }

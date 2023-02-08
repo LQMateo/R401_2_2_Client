@@ -1,6 +1,7 @@
 ﻿using Client.Models;
 using Client.Services;
 using CommunityToolkit.Mvvm.Input;
+using System;
 
 namespace Client.ViewModels
 {
@@ -19,18 +20,10 @@ namespace Client.ViewModels
         {
             if (Serie.formatIsGood(Serie))
             {
-                WSService<Serie> ws = new WSService<Serie>("Series");
-                var result = await ws.PostAsync("Series", Serie);
+                WSService<Serie> ws = new WSService<Serie>();
                 Serie tempon = Serie;
                 Serie = new Serie();
-
-                if (((double)result.StatusCode) == 201)
-                    ShowAsync("Série ajouté avec succès", "Succes");
-                else
-                {
-                    Serie = tempon;
-                    ShowAsync("Problème dans l'ajout");
-                }
+                AddSerieAsync(tempon);
             }
             else
             {
@@ -38,6 +31,23 @@ namespace Client.ViewModels
             }
             
         }
+
+        public async void AddSerieAsync(Serie objet)
+        {
+            WSService<Serie> ws = new WSService<Serie>();
+            var result = await ws.PostAsync("Series", objet);
+            
+
+            if (((double)result.StatusCode) == 201)
+                ShowAsync("Série ajouté avec succès", "Succes");
+            else
+            {
+                Serie = objet;
+                ShowAsync("Problème dans l'ajout");
+            }
+        }
+
+
 
         public AddSerieViewModel()
         {

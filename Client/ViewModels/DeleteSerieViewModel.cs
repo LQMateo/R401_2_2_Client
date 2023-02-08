@@ -24,7 +24,16 @@ namespace Client.ViewModels
         /// </summary>
         public async void ActionDeleteSerie()
         {
-            
+            WSService<Serie> ws = new WSService<Serie>();
+            var result = await ws.DeleteAsync("Series/" + Serie.Serieid);
+
+            if (result != null && ((double)result.StatusCode) == 204)
+                ShowAsync("Série supprimé avec succès", "Succes");
+            else
+            {
+                ShowAsync("Problème dans la suppression");
+            }
+
 
         }
 
@@ -36,7 +45,7 @@ namespace Client.ViewModels
 
         private async void GetDataOnLoadAsync()
         {
-            WSService<Serie> ws = new WSService<Serie>("");
+            WSService<Serie> ws = new WSService<Serie>();
             List<Serie> result = await ws.GetAsync("Series");
 
             if (Series != null)

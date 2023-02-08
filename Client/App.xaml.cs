@@ -28,6 +28,7 @@ namespace Client
             this.InitializeComponent();
             Ioc.Default.ConfigureServices(
                 new ServiceCollection()
+                .AddSingleton<AddSerieViewModel>()
                 .AddSingleton<UpdateSerieViewModel>()
                 .AddSingleton<DeleteSerieViewModel>()
                 .BuildServiceProvider()
