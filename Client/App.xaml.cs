@@ -2,12 +2,10 @@
 // Licensed under the MIT License.
 
 using Client.ViewModels;
-using Client.Views;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -60,8 +58,8 @@ namespace Client
             m_window = new MainWindow();
             Frame rootFrame = new Frame();
             //this.m_window.Content = rootFrame;
-            m_window.Activate();
             /*rootFrame.Navigate(typeof(MainWindow));*/
+            m_window.Activate();            
             MainRoot = m_window.Content as FrameworkElement;
 
         }

@@ -47,7 +47,6 @@
             RelativePanel.Below="nameSerieLabel"
             Text="{Binding Serie.Titre, Mode=TwoWay}" />
 
-
         <TextBlock
             x:Name="resumeSerieLabel"
             Margin="10"
@@ -61,7 +60,6 @@
             RelativePanel.AlignHorizontalCenterWithPanel="True"
             RelativePanel.Below="resumeSerieLabel"
             Text="{Binding Serie.Resume, Mode=TwoWay}" />
-
 
         <TextBlock
             x:Name="numberSeasonsLabel"

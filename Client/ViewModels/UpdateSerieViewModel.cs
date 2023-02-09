@@ -46,6 +46,9 @@ namespace Client.ViewModels
 
         }
 
+        /// <summary>
+        /// Action for update serie
+        /// </summary>
         public UpdateSerieViewModel()
         {
             GetDataOnLoadAsync();
@@ -53,6 +56,9 @@ namespace Client.ViewModels
             BtnUpdate = new RelayCommand(ActionUpdateSerie);
         }
 
+        /// <summary>
+        /// Action for load asyn the serie
+        /// </summary>
         private async void GetDataOnLoadAsync()
         {
             WSService<Serie> ws = new WSService<Serie>();

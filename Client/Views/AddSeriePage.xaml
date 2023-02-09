@@ -108,7 +108,5 @@
             Content="Ajouter"
             RelativePanel.AlignHorizontalCenterWithPanel="True"
             RelativePanel.Below="numberNetworkInput" />
-
-
     </RelativePanel>
 </Page>

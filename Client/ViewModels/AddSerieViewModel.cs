@@ -1,7 +1,6 @@
 ﻿using Client.Models;
 using Client.Services;
 using CommunityToolkit.Mvvm.Input;
-using System;
 
 namespace Client.ViewModels
 {
